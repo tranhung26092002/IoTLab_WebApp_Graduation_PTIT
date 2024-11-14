@@ -8,7 +8,7 @@ import {
   Route,
   Routes
 } from 'react-router-dom';
-import { history } from './utils/config';
+import { history } from './config/config';
 import { Login } from './pages/login/Login';
 import { Home } from './pages/home/Home';
 
@@ -16,7 +16,7 @@ import AuthGuard from './components/AuthGuard';
 import AdminPage from './pages/admin/AdminPage';
 
 import AccountPage from './pages/Account/Account';
-import ContactPage from './pages/Contact/Contact';
+import ContactPage from './pages/contact/Contact';
 import AboutPage from './pages/About/About';
 import OpenKitBPage from './pages/OpenKitB/OpenKitB';
 

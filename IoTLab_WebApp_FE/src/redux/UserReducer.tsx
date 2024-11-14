@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
-import { ACCESS_TOKEN, USER_LOGIN, history, http, settings } from "../utils/config";
+import { ACCESS_TOKEN, USER_LOGIN, history, http, settings } from "../config/config";
 
 
 export interface LoginRequestPayload {

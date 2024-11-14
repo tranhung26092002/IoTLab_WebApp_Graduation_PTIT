@@ -1,93 +1,87 @@
 import React, { Fragment } from "react";
-import styles from "./Header.module.scss";
+import { NavLink } from "react-router-dom";
+import { Dropdown, Space } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../../redux/configStore";
-import { Dropdown, Menu, Space, message } from "antd";
-import { NavLink } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
-import { history } from "../../utils/config";
 import { logout } from "../../redux/UserReducer";
+import { message } from "antd";
+import { history } from "../../config/config";
 
-const Header: React.FC = () => {
+const Header = () => {
   const role = useSelector((state: RootState) => state.UserReducer.role);
-  const email = useSelector((state: RootState) => state.UserReducer.email);
+  const email = "B20DCVT199";
   const dispatch: DispatchType = useDispatch();
 
-  const handlAdminClick = () => {
+  const handleAdminClick = () => {
     if (role !== "admin") {
       message.error("Bạn không có quyền truy cập trang Admin");
       return;
     }
-
     history.push("/admin");
   };
 
-  const handLogout = () => {
+  const handleLogout = () => {
     dispatch(logout());
   };
 
   const menu = (
-    <Menu>
-      <Menu.Item key="admin">
-        <span className="text-decoration-none" onClick={handlAdminClick}>
-          Trang Admin
+    <div className="bg-white border border-gray-200 rounded-md shadow-md p-2">
+      <div className="border-t border-gray-200 mt-2">
+        <span
+          className="block py-1 px-2 hover:bg-gray-100 cursor-pointer"
+          onClick={handleAdminClick}
+        >
+          Admin
         </span>
-      </Menu.Item>
-      <Menu.Item key="chat">
-        <a href="/boxchat" target="_blank" className="text-decoration-none">
+        <a href="/profile" className="block py-1 px-2 hover:bg-gray-100">
+          Thông tin cá nhân
+        </a>
+        <a
+          href="/boxchat"
+          target="_blank"
+          className="block py-1 px-2 hover:bg-gray-100"
+        >
           Trợ giảng lab
         </a>
-      </Menu.Item>
-      <Menu.Item key="logout" onClick={handLogout}>
-        <span className="text-decoration-none">Đăng xuất</span>
-      </Menu.Item>
-    </Menu>
+        <span
+          className="block py-1 px-2 hover:bg-gray-100 cursor-pointer"
+          onClick={handleLogout}
+        >
+          Đăng xuất
+        </span>
+      </div>
+    </div>
   );
 
   return (
     <Fragment>
-      <div className={styles.headerContainer}>
-        <div className={styles.topRow}>
-          <div className={styles.logoLeft}>
+      {/* Top Row */}
+      <div className="flex flex-col w-full bg-white fixed top-0 left-0 right-0 z-50 shadow-md">
+        <div className="flex justify-between items-center p-4 space-x-4">
+          {/* Logo Section */}
+          <div className="flex items-center space-x-4 flex-grow">
             <img
-              src={require("../../assets/img/logo120.png")}
-              alt="logo_left"
+              src="https://ptit.edu.vn/wp-content/uploads/2024/05/logo-ptit-1.svg"
+              alt="Học viện Công nghệ Bưu Chính Viễn Thông – PTIT"
+              className="logo_desktop"
+              style={{ width: "347px", height: "40px" }}
             />
-            <div className={styles.logoText}>
-              <div className={styles.textDanger}>
-                HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG
-              </div>
-              <div>Posts and Telecommunications Institute of Technology</div>
-            </div>
           </div>
-          <div className={styles.logoRight}>
-            <div
-              className="lang"
-              style={{ textAlign: "center", padding: "5px 12px 0 0" }}
-            >
-              <a className="mr-2 mb-4" href="https://portal.ptit.edu.vn">
-                <img
-                  src="https://portal.ptit.edu.vn/wp-content/uploads/2016/04/quoc-ky-viet-nam.jpg"
-                  title="Tiếng Việt"
-                  style={{ textAlign: "right" }}
-                  alt=""
-                />
-              </a>
-              <a href="https://portal.ptit.edu.vn/eng/">
-                <img
-                  src="https://portal.ptit.edu.vn/wp-content/uploads/2016/04/quoc-ky-anh.jpg"
-                  title="Tiếng Anh"
-                  style={{ textAlign: "right" }}
-                  alt=""
-                />
-              </a>
-            </div>
 
+          {/* Language Switcher and Dropdown */}
+          <div className="flex items-center space-x-2 text-xs">
+          <a href="https://portal.ptit.edu.vn" className="mr-2">
+              <span className="text-lg font-medium text-gray-800">VN</span>
+            </a>
+            <a href="https://portal.ptit.edu.vn/eng/">
+              <span className="text-lg font-medium text-gray-800">EN</span>
+            </a>
+          </div>
+
+          <div>
             <Dropdown overlay={menu}>
-              <div
-                className="ant-dropdown-link"
-                onClick={(e) => e.preventDefault()}
-              >
+              <div className="flex items-center cursor-pointer">
                 <Space>
                   {email}
                   <DownOutlined />
@@ -96,30 +90,26 @@ const Header: React.FC = () => {
             </Dropdown>
           </div>
         </div>
-        <div className={styles.navigation}>
-          <NavLink to="/home" className={styles.link}>
-            HOME
-          </NavLink>
-          <br />
-          <NavLink to="/about" className={styles.link}>
-            ABOUT
-          </NavLink>
-          <br />
-          <NavLink to="/" className={styles.link}>
-            DOCUMENT
-          </NavLink>
-          <br />
-          <NavLink to="/open-kit" className={styles.link}>
-            OPEN-KIT
-          </NavLink>
-          <br />
-          <NavLink to="/contact" className={styles.link}>
-            CONTACT
-          </NavLink>
-          <br />
+
+        {/* Navigation */}
+        <div className="flex justify-center space-x-6 py-1">
+          {["Trang chủ", "Giới thiệu", "Tài liệu", "Open-Kit", "Liên hệ"].map((item) => (
+            <NavLink
+              key={item}
+              to={`/${item.toLowerCase()}`}
+              className="text-sm text-black py-1 px-2 relative hover:after:w-full after:content-[''] after:block after:w-0 after:h-1 after:bg-red-600 after:absolute after:bottom-[-3px] after:left-1/2 after:transform after:translate-x-[-50%]"
+            >
+              {item}
+            </NavLink>
+          ))}
         </div>
-        <div className={styles.redLine}></div>
+
+        {/* Red Line */}
+        <div className="h-[3.5px] bg-red-600 w-full mt-2"></div>
       </div>
+
+      {/* Extra space to prevent content from hiding under the fixed header */}
+      <div className="mt-[120px]"></div>
     </Fragment>
   );
 };

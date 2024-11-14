@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
-import { ACCESS_TOKEN, settings } from '../utils/config';
+import { ACCESS_TOKEN, settings } from '../config/config';
 
 interface AuthGuardProps {
     children: ReactNode;
