@@ -1,0 +1,43 @@
+/* src/index.css hoặc src/App.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Các quy tắc toàn cục */
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  @apply text-theme-text font-secondary text-base leading-7 bg-theme-white;
+  margin: 0;
+  text-align: left;
+}
+
+@media only screen and (min-width: 768px) {
+  body {
+    @apply bg-gray-100; /* hoặc bạn có thể dùng màu tùy chỉnh nếu muốn */
+    min-width: fit-content;
+  }
+}
+
+/* Cấu hình màu sắc cho các phần tử */
+:root {
+  --primary-color: #081140;
+  --secondary-color: #dc3545;
+  --text-primary-color: #77838f;
+  --theme-heading-font: "Gilroy", sans-serif;
+  --theme-secondary-font: "Roboto", sans-serif;
+  --theme-primary-color: #081140;
+  --theme-secondary-color: #dc3545;
+  --theme-heading-color: #081140;
+  --theme-text-color: #5e6f81;
+  --theme-white-color: #fff;
+  --theme-border-color: #ddd;
+}
+
+/* Thêm các quy tắc nếu cần */

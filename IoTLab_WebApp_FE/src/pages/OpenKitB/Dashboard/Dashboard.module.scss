@@ -1,0 +1,158 @@
+// Variables
+$primary-color: #484bf9;
+$main-bg: #f4f4f4;
+$card-bg: #fff;
+$card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+$hover-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    h1 {
+        color: #333;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .dashboard {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap; // Đảm bảo các item xuống hàng nếu không đủ chỗ
+        background-color: $main-bg;
+        padding: 1rem;
+        gap: 1rem; // Khoảng cách giữa các item
+        justify-content: space-between; // Căn đều các item trên hàng ngang
+
+        .item {
+            background-color: $card-bg;
+            padding: 1rem;
+            box-shadow: $card-shadow;
+            border-radius: 0.75rem;
+            flex: 1 1 calc(25% - 1rem); // Đảm bảo 4 item trên 1 hàng, trừ đi khoảng cách
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+            &:hover {
+                box-shadow: $hover-shadow;
+                transform: translateY(0px);
+            }
+
+            .insight_item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+
+                .content {
+                    h3 {
+                        margin: 0;
+                        font-size: 1rem;
+                        color: #333;
+                    }
+
+                    h1 {
+                        margin: 0;
+                        font-size: 2rem;
+                        font-weight: bold;
+                        color: #333;
+                    }
+                }
+
+                .icon {
+                    font-size: 2rem;
+                }
+            }
+
+            .chart_item,
+            .gauge_item {
+                background-color: $card-bg;
+                border-radius: 0.75rem;
+                box-shadow: $card-shadow;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: box-shadow 0.3s ease;
+                margin-bottom: 1rem;
+
+                &:hover {
+                    box-shadow: $hover-shadow;
+                }
+            }
+
+            .chart_item {
+                height: 300px; // Chiều cao mặc định
+                width: auto;
+            }
+
+            .gauge_item {
+                height: 250px; // Chiều cao mặc định
+                width: auto;
+            }
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 1024px) {
+    .item {
+        flex: 1 1 calc(50% - 1rem); // 2 items trên một hàng khi màn hình nhỏ hơn 1024px
+    }
+}
+
+@media (max-width: 768px) {
+    .item {
+        flex: 1 1 100%; // 1 item trên một hàng khi màn hình nhỏ hơn 768px
+    }
+
+    .insight_item {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .content {
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .icon {
+            margin-top: 0.5rem;
+            font-size: 1.5rem;
+        }
+    }
+
+    .chart_item,
+    .gauge_item {
+        height: 200px; // Chiều cao giảm xuống cho màn hình nhỏ
+    }
+}
+
+@media (max-width: 480px) {
+    .item {
+        padding: 0.5rem;
+
+        .insight_item {
+            .content {
+                h1 {
+                    font-size: 1.25rem;
+                }
+
+                h3 {
+                    font-size: 0.875rem;
+                }
+            }
+
+            .icon {
+                font-size: 1.25rem;
+            }
+        }
+
+        .chart_item,
+        .gauge_item {
+            height: 150px; // Chiều cao giảm xuống hơn nữa cho màn hình rất nhỏ
+        }
+    }
+}
